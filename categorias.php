@@ -52,8 +52,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <button class="btn btn-primary"><i class="fas fa-plus mr-1"></i>Nova
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo"><i
+                                            class="fas fa-plus mr-1"></i>Nova
                                         Categoria</button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Nova categoria</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Fechar">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form>
+                                                <div class="modal-body">
+                                                    
+                                                    
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Fechar</button>
+                                                    <button type="button" class="btn btn-primary">Salvar
+                                                        mudanças</button>
+                                                </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--fim do Modal-->
 
                                     <div class="card-tools">
                                         <ul class="pagination pagination-sm float-right">
@@ -77,7 +107,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             </tr>
                                         </thead>
                                         <tbody>
-                                    <?php                                         
+                                            <?php                                         
                                          require_once (realpath(dirname(__FILE__).'/src/models/CategoriaModel.php'));
                                          $listaCategorias = CategoriaModel::listarTodos();
                                          foreach ($listaCategorias as $categoria){
