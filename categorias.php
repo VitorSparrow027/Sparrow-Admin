@@ -32,16 +32,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Categorias de Eventos</h1>
-                        </div><!-- /.col -->
+                            <h1 class="m-0 text-dark">Categorias de eventos</h1>
+                        </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Categorias de Eventos</li>
+                                <li class="breadcrumb-item active">Categorias de eventos</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
+                </div>
             </div>
             <!-- /.content-header -->
 
@@ -52,9 +52,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <button class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo"><i
-                                            class="fas fa-plus mr-1"></i>Nova
-                                        Categoria</button>
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo">
+                                        <i class="fas fa-plus mr-1"></i>Nova categoria
+                                    </button>
 
                                     <!-- Modal -->
                                     <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog"
@@ -68,36 +68,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <form>
-                                                <div class="modal-body">
-                                                    
-                                                    
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Fechar</button>
-                                                    <button type="button" class="btn btn-primary">Salvar
-                                                        mudanças</button>
-                                                </div>
+                                                <form method="POST">
+                                                    <div class="modal-body">
+                                                        <input type="hidden" name="acao" value="insert">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label>Nome da categoria</label>
+                                                                    <input type="text" class="form-control" name="txtNomeCategoria" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Fechar</button>
+                                                        <button name="insert" type="submit" class="btn btn-primary">Salvar
+                                                            mudanças</button>
+                                                    </div>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
-                                    <!--fim do Modal-->
-
-                                    <div class="card-tools">
-                                        <ul class="pagination pagination-sm float-right">
-                                            <li class="page-item"><a class="page-link" href="#">«</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">»</a></li>
-                                        </ul>
-                                    </div>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body p-0">
-                                    <table class="table">
+
+                                    <table class="table table-striped">
                                         <thead>
                                             <tr>
                                                 <th style="width: 10px">#</th>
@@ -107,19 +105,56 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php                                         
-                                         require_once (realpath(dirname(__FILE__).'/src/models/CategoriaModel.php'));
-                                         $listaCategorias = CategoriaModel::listarTodos();
-                                         foreach ($listaCategorias as $categoria){
-                                             echo "<tr>
-                                                    <td>".$categoria['id_categoria']."</td>
-                                                    <td>".$categoria['nome']."</td>
-                                                    <td>".$categoria['status']."</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    </tr>";
-                                         }
-                                    ?>
+                                            <?php 
+                                            require_once realpath(dirname(__FILE__).'/src/models/CategoriaModel.php');
+                                            
+                                            $listaCategorias = CategoriaModel::listarTodos();
+                                            foreach ($listaCategorias as $categoria) {
+                                                  echo "<tr>
+                                                        <td>".$categoria['id_categoria']."</td>
+                                                        <td>".$categoria['nome']."</td>
+                                                        <td>".$categoria['status']."</td>
+                                                        <td><button class='btn btn-primary' data-toggle='modal' data-target='#modalAlterar'>
+                                                            <i class='fas fa-plus mr-1'></i>Editar
+                                                            </button></td>
+                                                      </tr>";
+                                            }
+                                        ?>
+                                                                            <div class="modal fade" id="modalAlterar" tabindex="-1" role="dialog"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Alterar categoria</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Fechar">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form method="POST">
+                                                    <div class="modal-body">
+                                                        <input type="hidden" name="acao" value="insert">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label>Nome da categoria</label>
+                                                                    <input type="text" class="form-control" name="txtNomeCategoria" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Fechar</button>
+                                                        <button name="insert" type="submit" class="btn btn-primary">Salvar
+                                                            mudanças</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -127,8 +162,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </div>
                         </div>
                     </div>
-                    <!-- /.row -->
-                </div><!-- /.container-fluid -->
+                </div>
             </div>
             <!-- /.content -->
         </div>
