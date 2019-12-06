@@ -1,3 +1,6 @@
+<?php
+    require_once realpath(dirname(__FILE__).'/src/models/CategoriaModel.php'); 
+?>
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -75,7 +78,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
                                                                     <label>Nome da categoria</label>
-                                                                    <input type="text" class="form-control" name="txtNomeCategoria" required>
+                                                                    <input type="text" class="form-control"
+                                                                        name="txtNomeCategoria" required>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -84,7 +88,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
                                                             data-dismiss="modal">Fechar</button>
-                                                        <button name="insert" type="submit" class="btn btn-primary">Salvar
+                                                        <button name="insert" type="submit"
+                                                            class="btn btn-primary">Salvar
                                                             mudanças</button>
                                                     </div>
                                                 </form>
@@ -95,18 +100,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <!-- /.card-header -->
                                 <div class="card-body p-0">
 
-                                    <table class="table table-striped">
+                                    <table id="tabelaCategorias" class="table table-striped">
                                         <thead>
                                             <tr>
                                                 <th style="width: 10px">#</th>
                                                 <th>Descrição</th>
                                                 <th>Status</th>
-                                                <th style="width: 40px">Ações</th>
+                                                <th style="width: 130px">Ações</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php 
-                                            require_once realpath(dirname(__FILE__).'/src/models/CategoriaModel.php');
+                                            
                                             
                                             $listaCategorias = CategoriaModel::listarTodos();
                                             foreach ($listaCategorias as $categoria) {
@@ -114,46 +119,53 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <td>".$categoria['id_categoria']."</td>
                                                         <td>".$categoria['nome']."</td>
                                                         <td>".$categoria['status']."</td>
-                                                        <td><button class='btn btn-primary' data-toggle='modal' data-target='#modalAlterar'>
-                                                            <i class='fas fa-plus mr-1'></i>Editar
+                                                        <td><button class='btn btn-primary' data-tooltip='tooltip' data-toggle='modal' data-target='#modalAlterar'>
+                                                        <i class='fas fa-edit'data-tooltip='tooltip' data-placement='top' title='Editar'tooltip' data-placement='top' title='Editar'></i>
+                                                            </button>
+
+                                                            <button class='btn btn-danger' data-tooltip='tooltip' title='Excluir'tooltip' data-toggle='modal' data-target='#modalAlterar'>
+                                                        <i class='fas fa-trash-alt'' data-placement='top'  data-placement='top'></i>
                                                             </button></td>
                                                       </tr>";
                                             }
                                         ?>
-                                                                            <div class="modal fade" id="modalAlterar" tabindex="-1" role="dialog"
-                                         aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Alterar categoria</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Fechar">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <form method="POST">
-                                                    <div class="modal-body">
-                                                        <input type="hidden" name="acao" value="insert">
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <div class="form-group">
-                                                                    <label>Nome da categoria</label>
-                                                                    <input type="text" class="form-control" name="txtNomeCategoria" required>
-                                                                </div>
-                                                            </div>
+                                            <div class="modal fade" id="modalAlterar" tabindex="-1" role="dialog"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Alterar categoria</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Fechar">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
                                                         </div>
+                                                        <form method="POST">
+                                                            <div class="modal-body">
+                                                                <input type="hidden" name="acao" value="insert">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group">
+                                                                            <label>Nome da categoria</label>
+                                                                            <input type="text" class="form-control"
+                                                                                name="txtNomeCategoria" required>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Fechar</button>
+                                                                <button name="insert" type="submit"
+                                                                    class="btn btn-primary">Salvar
+                                                                    mudanças</button>
+                                                            </div>
+                                                        </form>
 
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">Fechar</button>
-                                                        <button name="insert" type="submit" class="btn btn-primary">Salvar
-                                                            mudanças</button>
-                                                    </div>
-                                                </form>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
 
                                         </tbody>
                                     </table>
@@ -181,6 +193,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- REQUIRED SCRIPTS -->
 
     <?php require_once("dist/js/javascript.php");?>
+    <script>
+        $(document).ready(function() {
+            $('#tabelaCategorias').DataTable();
+        });
+    </script>
+
 </body>
 
 </html>
